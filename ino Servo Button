@@ -1,0 +1,43 @@
+#include <Servo.h>  // Import Servo library
+
+Servo my_servo;
+
+const int buttonPin = 2;   // Pin for the push button
+const int servoPin = 9;    // Pin for the servo signal
+
+int buttonState = 0;       
+
+int minAngle = 5;
+int maxAngle = 175;
+
+void setup() {
+  my_servo.attach(servoPin);    
+  pinMode(buttonPin, INPUT_PULLUP); 
+  my_servo.write(minAngle);       
+  delay(500);
+}
+
+void loop() {
+  buttonState = digitalRead(buttonPin); 
+
+  // Button pressed 
+  if (buttonState == LOW) {
+    delay(200); // 
+
+    // Move from min to max
+    for (int pos = minAngle; pos <= maxAngle; pos++) {
+      my_servo.write(pos);
+      delay(10);  // Speed of movement
+    }
+
+    delay(500); // Hold at top
+
+    // Move back to min
+    for (int pos = maxAngle; pos >= minAngle; pos--) {
+      my_servo.write(pos);
+      delay(10);
+    }
+
+    delay(500); 
+  }
+}
