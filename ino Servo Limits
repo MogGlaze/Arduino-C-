@@ -1,0 +1,41 @@
+#include <Servo.h> // Import Servo Library
+
+Servo my_servo;
+
+int minAngle = 5;    // min
+int maxAngle = 175;  // max
+int pos = 0;
+
+void setup() {
+  my_servo.attach(9);   // Attach the servo to pin 9
+
+  // Test minimum angle
+  my_servo.write(minAngle);
+  delay(2000); 
+
+  // Test maximum angle
+  my_servo.write(maxAngle);
+  delay(2000); 
+
+  my_servo.write((minAngle + maxAngle) / 2);
+  delay(1000);
+}
+
+void loop() {
+
+  // Move from min to max
+  for (pos = minAngle; pos <= maxAngle; pos++) {
+    my_servo.write(pos);
+    delay(15);
+  }
+
+  delay(500);
+
+  // Move from max to min
+  for (pos = maxAngle; pos >= minAngle; pos--) {
+    my_servo.write(pos);
+    delay(15);
+  }
+
+  delay(500);
+}
