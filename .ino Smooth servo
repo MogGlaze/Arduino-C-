@@ -1,0 +1,32 @@
+#include <Servo.h> // Import Servo Library
+
+Servo my_servo;  // Create servo object
+
+int pos = 0;     // Variable to store the servo position
+
+void setup() {
+  my_servo.attach(9);   // Attach servo to pin 9
+  pos = 0;              // Set initial position
+  my_servo.write(pos);  // Move to starting position
+  delay(1000);          // Wait 1 second
+}
+
+void loop() {
+  // Move slowly from 0 to 180 degrees
+  for (pos = 0; pos <= 180; pos++) {
+    my_servo.write(pos);
+    delay(10);  // Adjust delay for speed (smaller = faster)
+  }
+
+  // Pause at 180 degrees
+  delay(500);
+
+  // Move slowly from 180 back to 0 degrees
+  for (pos = 180; pos >= 0; pos--) {
+    my_servo.write(pos);
+    delay(10);
+  }
+
+  // Pause at 0 degrees
+  delay(500);
+}
